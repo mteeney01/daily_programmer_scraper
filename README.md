@@ -4,6 +4,7 @@ Script that scrapes the [/r/dailyprogrammer](https://www.reddit.com/r/dailyprogr
 ```sh
 git clone https://github.com/mteeney01/daily_programmer_scraper.git
 cd ./daily_programmer_scraper
+pip install -r requirements.txt
 python ./challenge-scraper.py
 ```
 
