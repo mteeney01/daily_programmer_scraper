@@ -3,10 +3,11 @@ import sys
 import praw, pprint, re
 
 CHALLENGES_DIR = os.curdir + '/challenges/'
-USER_AGENT = 'Daily Programmer Challenge Scraper by Matt'
+USER_AGENT = 'Daily Programmer Challenge Scraper by mteeney01'
 DIFFICULTY_PATTERN = r'\[(Easy|Intermediate|Hard)\]'
 FILE_EXTENSION = '.md'
 RETRIEVAL_ERROR = 'THERE WAS AN ERROR RETRIEVING THE CHALLENGE...'
+FOOTER = '\n\n-----------\n\nThis challenge was retrieved by [daily_programmer_scraper](https://github.com/mteeney01/daily_programmer_scraper)'
 
 def main():    
     r = praw.Reddit(user_agent=USER_AGENT)
@@ -17,6 +18,7 @@ def main():
             full_path = buildFullPath(submission)
             writeToFile(submission, full_path)
             already_done.append(submission.id)
+    print('Found {} challenges.'.format(len(already_done)))
 
 def buildFullPath(submission):
     difficulty_dir = getDifficulty(submission.title)
@@ -37,6 +39,7 @@ def writeToFile(submission, full_path):
             print(text)
         finally:
             f.write(text)
+            f.write(FOOTER)
             f.flush()                
 
 def stripIllegalPathCharacters(s):
